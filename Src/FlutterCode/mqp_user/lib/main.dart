@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget
       home: ActivitySplash(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        fontFamily: 'OpenSans',
         useMaterial3: true,
       ),
     );
