@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mqp_user/Data/AppColor.dart';
+import 'package:mqp_user/Screens/ActivityMain.dart';
 
 class ActivitySignup extends StatefulWidget
 {
@@ -149,7 +150,12 @@ class ActivitySignup_State extends State<ActivitySignup>
                   Container(
                     margin: EdgeInsets.only(top: 5,bottom: 5,left: 20,right: 20),
                     child: TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+
+                        //Get open main screen
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
+
+                      }, 
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(AppColor.BlueColor),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(

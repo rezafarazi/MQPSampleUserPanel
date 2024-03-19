@@ -5,6 +5,7 @@ class AppColor
 
   static var BlueColor=Color(0XFF174E68);
   static var OrangeColor=Color(0XFFFF5722);
+  static var TextColor=Color(0XFF686868);
 
   static var WhiteColor=Colors.white;
   static var BackgroundColor=Color(0XFFE7FAFE);

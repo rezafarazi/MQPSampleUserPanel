@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:mqp_user/Data/AppColor.dart';
 import 'package:mqp_user/Screens/ActivitySignup.dart';
 
+import 'ActivityMain.dart';
+
 class ActivityLogin extends StatefulWidget
 {
 
@@ -98,7 +100,12 @@ class ActivityLogin_State extends State<ActivityLogin>
                   Container(
                     margin: EdgeInsets.only(top: 10,bottom: 5,left: 20,right: 20),
                     child: TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        
+                        //Get open main screen
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
+
+                      }, 
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(AppColor.BlueColor),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
