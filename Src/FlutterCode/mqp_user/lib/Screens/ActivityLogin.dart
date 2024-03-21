@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mqp_user/Data/AppColor.dart';
 import 'package:mqp_user/Screens/ActivitySignup.dart';
 
+import '../Api/api.dart';
 import 'ActivityMain.dart';
 
 class ActivityLogin extends StatefulWidget
@@ -16,6 +17,12 @@ class ActivityLogin extends StatefulWidget
 
 class ActivityLogin_State extends State<ActivityLogin>
 {
+
+
+  //Global variables
+  var UsernameTextBox=TextEditingController();
+  var PasswordTextBox=TextEditingController();
+
   
   
   //Build function start
@@ -49,6 +56,7 @@ class ActivityLogin_State extends State<ActivityLogin>
                     margin: EdgeInsets.only(top: 20,bottom: 10,left: 20,right: 20),
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: TextField(
+                      controller: UsernameTextBox,
                       style: TextStyle(fontSize: 14),
                       keyboardType: TextInputType.text,
                       textAlign: TextAlign.center,
@@ -75,6 +83,7 @@ class ActivityLogin_State extends State<ActivityLogin>
                     margin: EdgeInsets.only(top: 10,bottom: 10,left: 20,right: 20),
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: TextField(
+                      controller: PasswordTextBox,
                       style: TextStyle(fontSize: 14),
                       keyboardType: TextInputType.visiblePassword,
                       textAlign: TextAlign.center,
@@ -102,8 +111,12 @@ class ActivityLogin_State extends State<ActivityLogin>
                     child: TextButton(
                       onPressed: (){
                         
+                        
+                        //Get call login api
+                        api().GetLogin(context,UsernameTextBox.text.toString(),PasswordTextBox.text.toString());
+
                         //Get open main screen
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
+                        // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
 
                       }, 
                       style: ButtonStyle(
