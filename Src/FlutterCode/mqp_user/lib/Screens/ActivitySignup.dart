@@ -128,6 +128,9 @@ class ActivitySignup_State extends State<ActivitySignup>
                       style: TextStyle(fontSize: 14),
                       keyboardType: TextInputType.visiblePassword,
                       textAlign: TextAlign.center,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(7),

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mqp_user/Data/AppColor.dart';
+import 'package:mqp_user/Data/DataSaver.dart';
 import 'package:mqp_user/Widgets/FlatActionButton.dart';
 import 'package:mqp_user/Widgets/TopAppBar.dart';
+
+import '../Data/Statics.dart';
 
 class ActivityMain extends StatefulWidget
 {
@@ -14,6 +17,7 @@ class ActivityMain extends StatefulWidget
 
 class ActivityMain_State extends State<ActivityMain>
 {
+
   
   //Build function start
   @override

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mqp_user/Data/AppColor.dart';
+import 'package:mqp_user/Data/DataSaver.dart';
+import 'package:mqp_user/Data/Statics.dart';
 import 'package:mqp_user/Screens/ActivitySignup.dart';
 
 import '../Api/api.dart';
@@ -22,6 +25,8 @@ class ActivityLogin_State extends State<ActivityLogin>
   //Global variables
   var UsernameTextBox=TextEditingController();
   var PasswordTextBox=TextEditingController();
+
+  var LoadingLoginButtton=false;
 
   
   
@@ -87,6 +92,9 @@ class ActivityLogin_State extends State<ActivityLogin>
                       style: TextStyle(fontSize: 14),
                       keyboardType: TextInputType.visiblePassword,
                       textAlign: TextAlign.center,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(7),
@@ -112,11 +120,42 @@ class ActivityLogin_State extends State<ActivityLogin>
                       onPressed: (){
                         
                         
-                        //Get call login api
-                        api().GetLogin(context,UsernameTextBox.text.toString(),PasswordTextBox.text.toString());
+                        //Get loading when click
+                        setState(() {
+                          LoadingLoginButtton=true;
+                        });
 
-                        //Get open main screen
-                        // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
+                        //Get call login api
+                        api().GetLogin(context,UsernameTextBox.text.toString(),PasswordTextBox.text.toString()).then((value) {
+
+                          if(value)
+                          {
+                            //Get open main screen
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ActivityMain()), (route) => false);
+
+                            //Get save data in device
+                            DataSaver.Save_Data("mqp_user_token", Statics.UserData.token.toString());
+
+                          }
+                          else
+                          {
+
+                            //Get loading when click
+                            setState(() {
+                              LoadingLoginButtton=false;
+                            });
+
+                            Fluttertoast.showToast(
+                                msg: "User not found",
+                                gravity: ToastGravity.BOTTOM,
+                                webPosition: "bottom",
+                                toastLength: Toast.LENGTH_SHORT,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          }
+
+                        });
 
                       }, 
                       style: ButtonStyle(
@@ -130,7 +169,7 @@ class ActivityLogin_State extends State<ActivityLogin>
                       child: Container(
                         padding: EdgeInsets.all(12),
                         child: Center(
-                          child: Text("Login",style: TextStyle( color: Colors.white ),),
+                          child: (LoadingLoginButtton)? SizedBox( width: 23,height: 23,child: CircularProgressIndicator( color: AppColor.WhiteColor, strokeWidth: 2.5, ), ) :Text("Login",style: TextStyle( color: Colors.white ),)
                         ),
                       )
                     ),
